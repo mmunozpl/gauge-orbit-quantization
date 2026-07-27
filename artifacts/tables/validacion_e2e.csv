@@ -1,0 +1,5 @@
+condicion,bits,top1,post_hoc_declarado
+identidad,4,0.9308,False
+mejor_orto_muestreado,4,0.9026,False
+peor_orto_muestreado,4,0.9034,False
+gl_escala2,4,0.01,True

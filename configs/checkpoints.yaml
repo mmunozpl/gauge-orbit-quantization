@@ -1,0 +1,6 @@
+# rutas a checkpoints, modelos y datos, nunca hardcodeadas en el
+# código.
+vitb_ckpt: /ruta/al/checkpoint_seed42.pt
+pythia_model_id: EleutherAI/pythia-410m
+imagenet100_root: /ruta/al/val/de/imagenet-100
+imagenet100_wnids: configs/imagenet100_cmc.txt

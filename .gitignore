@@ -3,9 +3,13 @@
 SPEC_*.md
 notas_*.md
 *.local.md
+/nota/
+ESTADO_ACTUAL.md
 
-# artefactos pesados / generados
-/artifacts/
+# artefactos pesados / generados: el csv crudo del barrido se
+# queda fuera (7,6 MB); las tablas de lectura en frío y las figuras
+# SÍ se versionan (nota corta, dataset pequeño, trazabilidad directa).
+/artifacts/logs/
 /artifacts_*/
 __pycache__/
 *.pyc
