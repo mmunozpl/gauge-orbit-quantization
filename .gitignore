@@ -1,0 +1,24 @@
+# proceso local, no versionado (convención del árbol: solo
+# README/LEEME + código se comitean)
+SPEC_*.md
+notas_*.md
+*.local.md
+
+# artefactos pesados / generados
+/artifacts/
+/artifacts_*/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# LaTeX build (si se añade la nota .tex en este repo)
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# entorno local (pyproject.toml + uv.lock SÍ se versionan, para
+# fijar las versiones exactas del barrido)
+.venv/
