@@ -50,8 +50,7 @@ circuito OV, atención multi-cabeza, RTN.
 ├── scripts/      # sanities, barrido, lectura en frío, validación
 │                 # end-to-end y figuras
 ├── configs/      # rutas a modelos y datos, nunca en el código
-├── artifacts/    # tablas de lectura y figuras
-└── paper/        # la nota, en español e inglés
+└── artifacts/    # tablas de lectura y figuras
 ```
 
 El csv crudo del barrido (170 016 filas, 7,6 MB) no se versiona; lo regenera
@@ -72,8 +71,18 @@ uv pip install -r <(uv export --no-hashes --no-dev)
 
 Los pesos de ViT-B y el conjunto de validación de ImageNet-100 no son
 redistribuibles: se descargan aparte y sus rutas se declaran en
-`configs/checkpoints.yaml`, nunca en el código. Pythia-410M se toma de sus
-pesos públicos.
+`configs/checkpoints.local.yaml`, que no se versiona, nunca en el código.
+Pythia-410M se toma de sus pesos públicos.
+
+```yaml
+# configs/checkpoints.local.yaml
+vitb_ckpt: /ruta/al/checkpoint_seed42.pt
+imagenet100_root: /ruta/al/val/de/imagenet-100
+```
+
+Los valores admiten variables de entorno (`$VAR`). Sin ese fichero, los
+pasos que no necesitan esas rutas siguen corriendo; los que sí, avisan de
+cuál falta.
 
 ```bash
 python scripts/sanity.py          # las tres compuertas previas

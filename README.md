@@ -49,8 +49,7 @@ circuit, multi-head attention, RTN.
 ├── scripts/      # sanity gates, sweep, cold reading, end-to-end
 │                 # validation and figures
 ├── configs/      # paths to models and data, never in the code
-├── artifacts/    # reading tables and figures
-└── paper/        # the note, in Spanish and English
+└── artifacts/    # reading tables and figures
 ```
 
 The sweep's raw csv (170,016 rows, 7.6 MB) is not versioned; `scripts/sweep.py`
@@ -71,8 +70,18 @@ uv pip install -r <(uv export --no-hashes --no-dev)
 
 The ViT-B weights and the ImageNet-100 validation set are not
 redistributable: they are downloaded separately and their paths declared in
-`configs/checkpoints.yaml`, never in the code. Pythia-410M is taken from its
-public weights.
+`configs/checkpoints.local.yaml`, which is not versioned, never in the code.
+Pythia-410M is taken from its public weights.
+
+```yaml
+# configs/checkpoints.local.yaml
+vitb_ckpt: /path/to/checkpoint_seed42.pt
+imagenet100_root: /path/to/imagenet-100/val
+```
+
+Values accept environment variables (`$VAR`). Without that file, the steps
+that do not need those paths still run; the ones that do report which is
+missing.
 
 ```bash
 python scripts/sanity.py          # the three prior gates

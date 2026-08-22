@@ -3,7 +3,9 @@
 SPEC_*.md
 notas_*.md
 *.local.md
+configs/*.local.yaml
 /nota/
+/paper/
 ESTADO_ACTUAL.md
 RESUMEN_REVISION.md
 
