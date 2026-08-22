@@ -5,6 +5,7 @@ notas_*.md
 *.local.md
 /nota/
 ESTADO_ACTUAL.md
+RESUMEN_REVISION.md
 
 # artefactos pesados / generados: el csv crudo del barrido se
 # queda fuera (7,6 MB); las tablas de lectura en frío y las figuras

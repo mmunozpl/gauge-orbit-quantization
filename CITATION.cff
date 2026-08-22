@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: >-
+  Si utiliza este trabajo, por favor cítelo como se indica a
+  continuación.
+title: >-
+  Flat inside, toxic outside: the value-output gauge orbit under
+  quantization
+type: software
+authors:
+  - given-names: Manuel
+    family-names: Muñoz Plá
+    email: mmunozpl@uoc.edu
+    orcid: "https://orcid.org/0009-0000-5714-912X"
+version: v1.0
+license: Apache-2.0
+url: "https://github.com/mmunozpl/gauge-orbit-quantization"
+keywords:
+  - quantization
+  - computational invariance
+  - gauge orbit
+  - OV circuit
+  - multi-head attention
+  - round-to-nearest
