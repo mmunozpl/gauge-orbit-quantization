@@ -3,8 +3,47 @@ message: >-
   Si utiliza este trabajo, por favor cítelo como se indica a
   continuación.
 title: >-
-  Flat inside, toxic outside: the value-output gauge orbit under
-  quantization
+  Gauge equivalence does not survive quantisation: value-output
+  orbit, norm-product bound, and consequences for rotational methods
+abstract: >-
+  Rotational quantisation methods exploit a computational invariance
+  of attention's value-output sector: rotating the pair (W_v, W_O)
+  without altering the function. That invariance is a subgroup of a
+  larger orbit —GL(d_h) per head, certified in the previous work— and
+  practice restricts it twice: to orthogonal rotations, and shared
+  across the heads of a layer. This note measures what both
+  restrictions buy in terms of the OV circuit's quantisation error, on
+  two architectures (Pythia-410M and a fine-tuned ViT-B/16), with a
+  deliberately simple quantiser that isolates the variable of
+  interest. Three results. Within the orthogonal subgroup the orbit is
+  flat: the error range across rotations stays at ×1.005–1.02 in
+  median, and the trained gauge is already within ×1.02–1.04 of the
+  best sampled point. Per-head freedom improves on the shared rotation
+  by 1.3 per cent, below the threshold the design fixed as material.
+  And in the sampled GL family, increasing anisotropy raises the error
+  monotonically, up to ×15 in median and ×10⁵ at the extreme. The
+  mechanism admits a closed form and a bound: the error is bounded by
+  the product of the transformed factors' norms, exponent one
+  predicted and 0.998 measured across two gauge families, so that the
+  catastrophic tail turns out to be the dispersion of conditioning
+  transmitted by that bound. The bound also names the design space's
+  border, which does not separate orthogonal from non-orthogonal: the
+  conformal orthogonal class leaves the bound's factor p invariant by
+  identity, the balanced point —non-orthogonal— minimises the bound
+  over the entire orbit, and the trained gauge sits within 1.1–1.5 per
+  cent of that optimum. An end-to-end validation confirms the flatness
+  in real accuracy: identity, best and worst sampled rotation and
+  balanced point fall within 0.10 percentage points, indistinguishable
+  by paired McNemar over the same 5,000 images. The contrast that
+  carries the weight is a different one. A general gauge at scale 2,
+  unquantised, predicts the same class as the identity on all 5,000
+  images, without a single discrepancy. Quantised to int4 it falls to
+  0.0082, below nominal chance over 100 classes, and then agrees with
+  the identity on 44 images. The control isolates the cause: gauge
+  equivalence is exact in real arithmetic and does not survive the
+  grid. The result further bounds where the gain of rotational methods
+  does not lie —not in the orbit's weight landscape—, consistent with
+  their usual attribution to activation outliers.
 type: software
 authors:
   - given-names: Manuel
@@ -12,10 +51,11 @@ authors:
     email: mmunozpl@uoc.edu
     orcid: "https://orcid.org/0009-0000-5714-912X"
 version: v1.0
+date-released: "2026-09-22"
 license: Apache-2.0
 url: "https://github.com/mmunozpl/gauge-orbit-quantization"
 keywords:
-  - quantization
+  - quantisation
   - computational invariance
   - gauge orbit
   - OV circuit

@@ -1,5 +1,8 @@
-condicion,bits,top1,post_hoc_declarado
-identidad,4,0.9308,False
-mejor_orto_muestreado,4,0.9026,False
-peor_orto_muestreado,4,0.9034,False
-gl_escala2,4,0.01,True
+condicion,bits,top1,desv_invariancia,post_hoc_declarado
+identidad_fp32,,0.9314,,False
+identidad,4,0.9308,,False
+mejor_orto_muestreado,4,0.9306,3.976204823175067e-07,False
+peor_orto_muestreado,4,0.9298,4.014851526790153e-07,False
+balanceado,4,0.9306,4.2091673435606936e-07,True
+gl_escala2_fp32,,0.9314,1.1825894034700468e-05,True
+gl_escala2,4,0.0082,1.1825894034700468e-05,True

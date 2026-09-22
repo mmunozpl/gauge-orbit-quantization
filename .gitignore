@@ -5,7 +5,11 @@ notas_*.md
 *.local.md
 configs/*.local.yaml
 /nota/
-/paper/
+# del paper viaja el PDF y no el fuente: el tag congela lo que
+# se deposita, y lo que se deposita es el PDF (convencion de la
+# casa, igual que en el trabajo previo).
+/paper/*
+!/paper/*.pdf
 ESTADO_ACTUAL.md
 RESUMEN_REVISION.md
 
@@ -14,6 +18,10 @@ RESUMEN_REVISION.md
 # SÍ se versionan (nota corta, dataset pequeño, trazabilidad directa).
 /artifacts/logs/
 /artifacts_*/
+# el portador de la demo son 258 mb de pesos extraidos; lo
+# reconstruye scripts/extraer_sector_vo.py y viaja al Space por
+# scripts/desplegar_demo.py, no por git.
+/artifacts/demo/
 __pycache__/
 *.pyc
 .pytest_cache/

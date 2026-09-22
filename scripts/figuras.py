@@ -87,18 +87,31 @@ def fig_cola_gl(df: pd.DataFrame, modelo: str, bits: int) -> None:
 
 def fig_por_cabeza_vs_compartida(df: pd.DataFrame, modelo: str,
                                  bits: int) -> None:
-    """mejor-de-k por-cabeza vs compartida, por capa (q3)."""
+    """mejor-de-k por-cabeza vs la mejor compartida, por capa (q3).
+
+    el brazo compartido usa UNA sola r por capa ---la muestra de
+    menor error medio sobre las cabezas---, la misma selección que
+    `scripts/lectura_fria.q3_por_cabeza_vs_compartida`. tomar aquí el
+    mínimo por cabeza dentro del brazo compartido dejaría que cada
+    cabeza eligiera su índice, y la curva ya no sería la de una
+    rotación compartida.
+    """
     sub = df[(df.bits == bits) & df.regimen.isin(["orto_ph", "orto_comp"])]
-    mejor = sub.groupby(
-        ["capa", "cabeza", "regimen"]).err_circuito.min().reset_index()
-    piv = mejor.pivot_table(index=["capa", "cabeza"], columns="regimen",
-                            values="err_circuito")
+    ph = sub[sub.regimen == "orto_ph"].groupby(
+        ["capa", "cabeza"]).err_circuito.min().rename("orto_ph")
+    comp = sub[sub.regimen == "orto_comp"]
+    medio = comp.groupby(["capa", "muestra"]).err_circuito.mean().reset_index()
+    elegida = medio.loc[medio.groupby("capa").err_circuito.idxmin(),
+                        ["capa", "muestra"]]
+    comp_unico = comp.merge(elegida, on=["capa", "muestra"]).set_index(
+        ["capa", "cabeza"]).err_circuito.rename("orto_comp")
+    piv = pd.concat([ph, comp_unico], axis=1)
     por_capa = piv.groupby("capa").median()
     fig, ax = plt.subplots(figsize=(7, 4))
     ax.plot(por_capa.index, por_capa["orto_ph"], marker="o",
            label="por-cabeza (mejor-de-k)")
     ax.plot(por_capa.index, por_capa["orto_comp"], marker="s",
-           label="compartida (mejor-de-k)")
+           label="compartida (una r por capa)")
     ax.set_xlabel("capa")
     ax.set_ylabel("error relativo del circuito $e$ (mediana)")
     ax.set_title(f"{modelo}: por-cabeza vs compartida (bits={bits})")

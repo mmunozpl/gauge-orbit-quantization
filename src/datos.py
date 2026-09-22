@@ -93,3 +93,56 @@ def top1(modelo: torch.nn.Module, loader: DataLoader,
         aciertos += int((pred == lbls).sum())
         total += int(lbls.numel())
     return aciertos / total
+
+
+@torch.no_grad()
+def predicciones_y_aciertos(
+    modelo: torch.nn.Module,
+    loader: DataLoader,
+    disp: str = "cuda",
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """clase predicha y acierto por imagen, en el orden del loader.
+
+    las dos cosas, y no solo el acierto, porque responden a preguntas
+    distintas. el acierto sostiene el contraste pareado de mcnemar:
+    dos condiciones sobre las mismas imágenes se comparan por sus
+    discordantes. la clase predicha sostiene una afirmación más
+    fuerte: cero discordantes de mcnemar dice que ambos modelos
+    aciertan y fallan las mismas imágenes, y deja abierto que fallen
+    prediciendo clases distintas. quien quiera afirmar «predice lo
+    mismo» necesita comparar el argmax.
+
+    args:
+        modelo: en eval, sobre `disp`.
+        loader: dataloader de validación, sin barajar.
+        disp: dispositivo.
+
+    returns:
+        (pred [n] int64 con la clase predicha, ok [n] bool).
+    """
+    modelo.eval()
+    preds, oks = [], []
+    for imgs, lbls in loader:
+        pred = modelo(imgs.to(disp, non_blocking=True)).argmax(dim=1).cpu()
+        preds.append(pred)
+        oks.append(pred == lbls)
+    return torch.cat(preds), torch.cat(oks)
+
+
+@torch.no_grad()
+def aciertos_por_imagen(
+    modelo: torch.nn.Module,
+    loader: DataLoader,
+    disp: str = "cuda",
+) -> torch.Tensor:
+    """solo el vector de aciertos; envoltorio de la función anterior.
+
+    args:
+        modelo: en eval, sobre `disp`.
+        loader: dataloader de validación, sin barajar.
+        disp: dispositivo.
+
+    returns:
+        tensor bool [n], True donde la predicción acierta.
+    """
+    return predicciones_y_aciertos(modelo, loader, disp)[1]

@@ -56,19 +56,52 @@ def q2_gauge_entrenado(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def q3_por_cabeza_vs_compartida(df: pd.DataFrame) -> pd.DataFrame:
-    """mejor-de-k por-cabeza contra mejor-de-k compartida.
+    """mejor-de-k por-cabeza contra la mejor rotación compartida.
+
+    corrección metodológica del 22-09-2026. la primera implementación
+    tomaba, dentro del régimen compartido, el mínimo por cabeza sobre
+    las k muestras: cada cabeza acababa escogiendo un índice distinto,
+    y el brazo «compartido» dejaba de serlo. el contraste comparaba
+    entonces libertad por-cabeza contra libertad por-cabeza, y daba
+    una mejora nula por construcción.
+
+    la lectura corregida escoge UNA sola r por capa —la muestra que
+    minimiza el error medio sobre las cabezas de esa capa, que es el
+    objetivo agregado que un método rotacional optimizaría— y la
+    evalúa cabeza a cabeza. la pregunta q3 y su listón son los
+    preregistrados; la implementación de «compartida» es lo que se
+    corrige.
 
     por (capa, cabeza, bits): mejora relativa =
-    (comp_mejor - ph_mejor) / comp_mejor. material si mediana >= 0.20,
-    nulo si mediana < 0.05.
+    (comp_unico - ph_mejor) / comp_unico. material si la mediana es
+    >= 0.20, nulo si < 0.05.
     """
     ph = df[df.regimen == "orto_ph"].groupby(
         ["capa", "cabeza", "bits"]).err_circuito.min().rename("ph_mejor")
-    comp = df[df.regimen == "orto_comp"].groupby(
-        ["capa", "cabeza", "bits"]).err_circuito.min().rename("comp_mejor")
-    tabla = pd.concat([ph, comp], axis=1).reset_index()
+    comp = df[df.regimen == "orto_comp"]
+    # una sola muestra por (capa, bits): la de menor error medio sobre
+    # las cabezas de la capa.
+    medio = comp.groupby(
+        ["capa", "bits", "muestra"]).err_circuito.mean().reset_index()
+    elegida = medio.loc[
+        medio.groupby(["capa", "bits"]).err_circuito.idxmin(),
+        ["capa", "bits", "muestra"]]
+    comp_unico = comp.merge(elegida, on=["capa", "bits", "muestra"]).set_index(
+        ["capa", "cabeza", "bits"]).err_circuito.rename("comp_unico")
+    # la lectura vieja, conservada como línea de regresión: hace
+    # legible la corrección en vez de sustituirla en silencio.
+    comp_porcabeza = comp.groupby(
+        ["capa", "cabeza", "bits"]).err_circuito.min().rename(
+            "comp_min_por_cabeza")
+    tabla = pd.concat(
+        [ph, comp_unico, comp_porcabeza], axis=1).reset_index()
+    tabla["muestra_compartida"] = tabla.merge(
+        elegida, on=["capa", "bits"], how="left").muestra.values
     tabla["mejora_relativa"] = (
-        (tabla.comp_mejor - tabla.ph_mejor) / tabla.comp_mejor)
+        (tabla.comp_unico - tabla.ph_mejor) / tabla.comp_unico)
+    tabla["mejora_implementacion_vieja"] = (
+        (tabla.comp_min_por_cabeza - tabla.ph_mejor)
+        / tabla.comp_min_por_cabeza)
     return tabla
 
 
@@ -117,8 +150,14 @@ def main() -> None:
     mediana_q3 = q3.mejora_relativa.median()
     veredicto_q3 = ("material" if mediana_q3 >= 0.20
                     else ("nulo" if mediana_q3 < 0.05 else "entremedias"))
-    print(f"\nQ3 — por-cabeza vs compartida: mediana mejora relativa "
-         f"= {mediana_q3:.1%} -> {veredicto_q3}")
+    print(f"\nQ3 — por-cabeza vs compartida (una r por capa): mediana "
+         f"mejora relativa = {mediana_q3:.2%} -> {veredicto_q3}")
+    print(f"     percentiles 10/90: "
+         f"{q3.mejora_relativa.quantile(0.10):.2%} / "
+         f"{q3.mejora_relativa.quantile(0.90):.2%}")
+    print(f"     [regresión] la implementación vieja, que dejaba a cada "
+         f"cabeza elegir su índice dentro del brazo compartido, daba "
+         f"{q3.mejora_implementacion_vieja.median():.2%}")
 
     print("\nCola gl_e por escala (mediana/media/máx del error):")
     print(gl.to_string(index=False))

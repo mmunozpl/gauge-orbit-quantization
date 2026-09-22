@@ -1,0 +1,8 @@
+condicion_a,condicion_b,top1_a,top1_b,dif_pp,ic95_inf_pp,ic95_sup_pp,discordantes_a,discordantes_b,mcnemar_p,indistinguibles,acuerdo_argmax,afirmacion
+mejor_orto_muestreado,peor_orto_muestreado,0.9306,0.9298,0.08000000000000229,-0.2,0.36,28,24,0.6778086391424605,True,0.9856,q1 end-to-end: la orbita ortogonal es plana
+identidad,mejor_orto_muestreado,0.9308,0.9306,0.019999999999997797,-0.27999999999999997,0.32,29,28,1.0,True,0.984,la identidad no es un punto especial dentro del subgrupo
+identidad,peor_orto_muestreado,0.9308,0.9298,0.10000000000000009,-0.13999999999999999,0.33999999999999997,22,17,0.5223973804968411,True,0.9886,la identidad no es un punto especial dentro del subgrupo
+identidad,balanceado,0.9308,0.9306,0.019999999999997797,-0.27999999999999997,0.32,28,27,1.0,True,0.9842,"el punto balanceado, gauge no ortogonal, no es toxico"
+identidad_fp32,identidad,0.9314,0.9308,0.060000000000004494,-0.2,0.3,21,18,0.7492586247608418,True,0.9894,coste de cuantizar int4 sin tocar el gauge
+identidad_fp32,gl_escala2_fp32,0.9314,0.9314,0.0,0.0,0.0,0,0,1.0,True,1.0,"control: el gauge gl solo, sin cuantizar"
+identidad,gl_escala2,0.9308,0.0082,92.25999999999999,91.5,93.0,4615,2,0.0,False,0.0088,"la cola toxica, end-to-end"

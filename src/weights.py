@@ -172,3 +172,70 @@ def escribe_v_o_vitb(
     col = slice(h * dim_cabeza, (h + 1) * dim_cabeza)
     w_qkv[fil, :] = w_v_h.to(w_qkv.dtype)
     w_proj[:, col] = w_o_h.to(w_proj.dtype)
+
+
+@torch.no_grad()
+def b_v_vitb(
+    modelo,
+    capa: int,
+    n_cabezas: int = 12,
+    dim_cabeza: int = 64,
+) -> torch.Tensor | None:
+    """sesgo de valor por cabeza de una capa de vit-b, en float64.
+
+    el sesgo de valor entra en la invariancia de gauge: como
+    v = x w_v^t + b_v, la compensación de w_o exige que b_v gire igual
+    que la weight (b_v <- r^t b_v). omitirlo en una columna con
+    qkv_bias rompe la invariancia, y el forward deja de medir el
+    gauge para medir otro modelo.
+
+    args:
+        modelo: el vit interno de timm.
+        capa: índice de capa.
+        n_cabezas: cabezas h.
+        dim_cabeza: d_h.
+
+    returns:
+        tensor [h, d_h] en float64, o None si la columna no lleva
+        qkv_bias.
+    """
+    attn = modelo.blocks[capa].attn
+    if attn.qkv.bias is None:
+        return None
+    b_qkv = attn.qkv.bias
+    base_v = 2 * (b_qkv.shape[0] // 3)
+    return torch.stack([
+        b_qkv[base_v + h * dim_cabeza:
+              base_v + (h + 1) * dim_cabeza].double()
+        for h in range(n_cabezas)])
+
+
+@torch.no_grad()
+def escribe_b_v_vitb(
+    modelo,
+    capa: int,
+    h: int,
+    b_v_h: torch.Tensor,
+    dim_cabeza: int = 64,
+) -> None:
+    """escribe el sesgo de valor de una cabeza, in situ.
+
+    inversa de `b_v_vitb` para una sola cabeza. el sesgo no se
+    cuantiza: el objeto cuantizado de la nota es el par de weights
+    (w_v, w_o), y el sesgo solo viaja para que el gauge siga siendo
+    un cambio de coordenadas y no un cambio de función.
+
+    args:
+        modelo: el vit interno de timm, modificado in situ.
+        capa: índice de capa.
+        h: índice de cabeza.
+        b_v_h: tensor [d_h], se castea al dtype del modelo.
+        dim_cabeza: d_h.
+    """
+    attn = modelo.blocks[capa].attn
+    if attn.qkv.bias is None:
+        raise ValueError("la columna no lleva qkv_bias")
+    b_qkv = attn.qkv.bias
+    base_v = 2 * (b_qkv.shape[0] // 3)
+    fil = slice(base_v + h * dim_cabeza, base_v + (h + 1) * dim_cabeza)
+    b_qkv[fil] = b_v_h.to(b_qkv.dtype)

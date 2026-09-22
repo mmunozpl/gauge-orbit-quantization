@@ -92,8 +92,10 @@ def reconstruye_muchos(
     args:
         objetivos: conjunto de tuplas
             (capa, cabeza, regimen, muestra, escala) — escala es
-            ``None`` salvo para regimen='gl_e'. cabeza se ignora para
-            'orto_comp' (usar el valor que sea, ej. -1).
+            ``None`` salvo para regimen='gl_e'. en 'orto_comp' la r es
+            por capa y la misma para todas las cabezas, pero la clave
+            exige el índice real de la cabeza: se registra una entrada
+            por cabeza, no un comodín.
         n_capas: capas totales del modelo (recorre 0..n_capas-1).
         n_cabezas: cabezas por capa.
         dim_cabeza: d_h.
