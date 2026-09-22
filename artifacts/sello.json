@@ -1,19 +1,19 @@
 {
-  "fecha_utc": "2026-09-22T19:18:00+00:00",
-  "commit": "a47480403e0fcfc8a754eaecfe56f96605a33045",
+  "fecha_utc": "2026-09-22T19:33:43+00:00",
+  "commit": "2d4d4789dc369f7f66c25200c0cc06c5267afcfc",
   "arbol_sucio": false,
   "piezas": {
     "CITATION.cff": {
-      "sha256": "e9bbfd0ac981052c8aa331fc05ee7fc90db72f864ae261e30b71aa6638f75290",
-      "bytes": 3278
+      "sha256": "40c90a1995229a081011678d400495a7e06eb20022f07da90ce1a963926afb65",
+      "bytes": 3451
     },
     "LEEME.md": {
-      "sha256": "958ac746cc8d991e6f67a6a3cd07b9004f068a6e932ae5c318a796e9ab325cc2",
-      "bytes": 9463
+      "sha256": "f680265e926d5923c4572d9838c03f396907abf76b4a6c27d20ab8bd1b779b8b",
+      "bytes": 10022
     },
     "README.md": {
-      "sha256": "72e592f850d6519300e6f41daa246f59a821532618fbe3b9aa99d4ad28b38ab8",
-      "bytes": 9236
+      "sha256": "58b6acbe8510cb59a7bb49f9e7ce5e1279eb3045b518cb68c2a2d321b10afb26",
+      "bytes": 9793
     },
     "artifacts/demo/sector_vo_pythia.safetensors": {
       "sha256": "60d47a1947aa620dbca68fae9d7a832405f4f554d6cd17a5b83705b41061966e",
