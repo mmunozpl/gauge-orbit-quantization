@@ -67,6 +67,8 @@ own gauges and requires the demo to return the same numbers to
 $3\\times10^{-15}$, against a tolerance of $10^{-12}$.
 
 Code and paper: https://github.com/mmunozpl/gauge-orbit-quantization
+Citable record: https://doi.org/10.5281/zenodo.22904207
+Data behind every table and figure: https://huggingface.co/datasets/ManPla/gauge-orbit-quantization-results
 """
 
 

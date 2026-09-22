@@ -4,7 +4,11 @@
 
 **Manuel Muñoz Plá** · [ORCID 0009-0000-5714-912X](https://orcid.org/0009-0000-5714-912X)
 
+[![Zenodo](https://img.shields.io/badge/Zenodo-10.5281%2Fzenodo.22904207-009e73)](https://doi.org/10.5281/zenodo.22904207)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-Dataset-ffd21e)](https://huggingface.co/datasets/ManPla/gauge-orbit-quantization-results)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-Space-ffd21e)](https://huggingface.co/spaces/ManPla/gauge-orbit-quantization-demo)
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0000--5714--912X-a6ce39)](https://orcid.org/0009-0000-5714-912X)
+[![Web](https://img.shields.io/badge/Web-manpla.net-009e73)](https://manpla.net)
 [![License](https://img.shields.io/badge/License-Apache--2.0-009e73)](LICENSE)
 [![Cite](https://img.shields.io/badge/Cite-BibTeX-009e73)](#cómo-citar)
 
@@ -13,7 +17,7 @@ computacional del sector valor-salida de la atención: rotar el par
 (*W_v*, *W_O*) sin alterar la función. Esa invariancia es un subgrupo de una
 órbita mayor —*GL(d_h)* por cabeza, certificada en el trabajo previo— y la
 práctica la restringe dos veces: a rotaciones ortogonales, y compartidas
-entre las cabezas de la capa. Esta nota mide qué compran ambas restricciones
+entre las cabezas de la capa. Aquí se mide qué compran ambas restricciones
 sobre el error de cuantización del circuito OV en dos arquitecturas
 (Pythia-410M y un ViT-B/16 afinado), con un cuantizador deliberadamente
 simple que aísla la variable de interés. Tres resultados. Dentro del subgrupo
@@ -157,14 +161,15 @@ del generador que el barrido consumió, sin persistir las matrices
 ## Cómo citar
 
 ```bibtex
-@unpublished{munozpla2026gaugeequivalence,
-  author = {Muñoz Plá, Manuel},
-  title  = {Gauge equivalence does not survive quantisation:
-            value-output orbit, norm-product bound, and consequences
-            for rotational methods},
-  year   = {2026},
-  note   = {Manuscrito},
-  url    = {https://github.com/mmunozpl/gauge-orbit-quantization}
+@software{munozpla2026gaugeequivalence,
+  author  = {Muñoz Plá, Manuel},
+  title   = {Gauge equivalence does not survive quantisation:
+             value-output orbit, norm-product bound, and consequences
+             for rotational methods},
+  year    = {2026},
+  version = {v1.0.1},
+  doi     = {10.5281/zenodo.22904207},
+  url     = {https://github.com/mmunozpl/gauge-orbit-quantization}
 }
 ```
 
