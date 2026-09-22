@@ -1,0 +1,91 @@
+{
+  "fecha_utc": "2026-09-22T19:18:00+00:00",
+  "commit": "a47480403e0fcfc8a754eaecfe56f96605a33045",
+  "arbol_sucio": false,
+  "piezas": {
+    "CITATION.cff": {
+      "sha256": "e9bbfd0ac981052c8aa331fc05ee7fc90db72f864ae261e30b71aa6638f75290",
+      "bytes": 3278
+    },
+    "LEEME.md": {
+      "sha256": "958ac746cc8d991e6f67a6a3cd07b9004f068a6e932ae5c318a796e9ab325cc2",
+      "bytes": 9463
+    },
+    "README.md": {
+      "sha256": "72e592f850d6519300e6f41daa246f59a821532618fbe3b9aa99d4ad28b38ab8",
+      "bytes": 9236
+    },
+    "artifacts/demo/sector_vo_pythia.safetensors": {
+      "sha256": "60d47a1947aa620dbca68fae9d7a832405f4f554d6cd17a5b83705b41061966e",
+      "bytes": 201326760
+    },
+    "artifacts/demo/sector_vo_vitb.safetensors": {
+      "sha256": "10ef9ef42a14cd3e6d3ddcd3ee3bd84a80dd3242ee3a2891766ead931607e4ad",
+      "bytes": 56623272
+    },
+    "artifacts/tables/colapso_producto.csv": {
+      "sha256": "0980e201885e9a3bc2d81e565c4b349f6f8a5417aa297b63b8f8bea7082085c7",
+      "bytes": 338
+    },
+    "artifacts/tables/consistencia_kappa.csv": {
+      "sha256": "6f58fb40c3dfebd622ca3f4a6859e6c059ec802eb891e46cee35aaa6eb8df39c",
+      "bytes": 5588
+    },
+    "artifacts/tables/contraste_e2e.csv": {
+      "sha256": "21a703be914a7a1bdf8c9bea442032556ec9b0ab3c4da4d88eeca1aff6c541a1",
+      "bytes": 1232
+    },
+    "artifacts/tables/lectura_fria_pythia_gl.csv": {
+      "sha256": "6c45818a37cff519afb56b189ea74af178457b28d0dce7760e56348e79fc592a",
+      "bytes": 406
+    },
+    "artifacts/tables/lectura_fria_pythia_q1.csv": {
+      "sha256": "d2e3928717541f16e47ad90a224ff0118b31f660a4748e5c9fe4e500848bfe7b",
+      "bytes": 26706
+    },
+    "artifacts/tables/lectura_fria_pythia_q2.csv": {
+      "sha256": "575082c9739abb2c76a20c5431b1256d547c7369abfd21f0002079f9526b028e",
+      "bytes": 24404
+    },
+    "artifacts/tables/lectura_fria_pythia_q3.csv": {
+      "sha256": "a517a4cb6d100ab0b2bfb7ebe54653614d56ef3fbc194a9ce30872613f5325e3",
+      "bytes": 84071
+    },
+    "artifacts/tables/lectura_fria_vitb_gl.csv": {
+      "sha256": "f62f98b8a52cc308187c9c37296f8786fe60f6c0079558b4484357fdab2d208a",
+      "bytes": 404
+    },
+    "artifacts/tables/lectura_fria_vitb_q1.csv": {
+      "sha256": "272f87991ed447d256d33341c1486447a8a7c4e7b765dc617f6c76f5a52b2b26",
+      "bytes": 9868
+    },
+    "artifacts/tables/lectura_fria_vitb_q2.csv": {
+      "sha256": "c1c57ada65142316e57f23d48486f49cfb79ddc5d15aeb34cb56a0d6e3626814",
+      "bytes": 9293
+    },
+    "artifacts/tables/lectura_fria_vitb_q3.csv": {
+      "sha256": "b72cd8e5f095f0426e94a58f764e383fc7d2399dfdade6bebbf2a83f45d99810",
+      "bytes": 31361
+    },
+    "artifacts/tables/lectura_kappa.csv": {
+      "sha256": "a38a9b1454166485439536a6845e1771665067f0f246ebcee78a673eec9f9600",
+      "bytes": 715
+    },
+    "artifacts/tables/punto_balanceado.csv": {
+      "sha256": "dc286495c1923d0feb4603d2afaf3e0f8faf2b1ebe7a0eaf3040aafe44921161",
+      "bytes": 770
+    },
+    "artifacts/tables/validacion_e2e.csv": {
+      "sha256": "f74eb11828f3d1c223d58b4be75c4d30db344d3cb611c6efd0214a90b0817f10",
+      "bytes": 385
+    },
+    "paper/gauge_orbit_quantization_en.pdf": {
+      "sha256": "914337b2857c54b1573945466ab851682918e5144412770d4c45f900f45ef963",
+      "bytes": 644933
+    },
+    "paper/gauge_orbit_quantization_es.pdf": {
+      "sha256": "c435d9dec47e72f3d3ea014d77ab19ed4677d22a8b9a59d522462c602a376d0c",
+      "bytes": 645148
+    }
+  }
+}
