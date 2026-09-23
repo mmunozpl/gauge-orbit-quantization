@@ -12,6 +12,7 @@ configs/*.local.yaml
 !/paper/*.pdf
 ESTADO_ACTUAL.md
 RESUMEN_REVISION.md
+reanudar.md
 
 # artefactos pesados / generados: el csv crudo del barrido se
 # queda fuera (7,6 MB); las tablas de lectura en frío y las figuras
