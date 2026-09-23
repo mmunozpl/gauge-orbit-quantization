@@ -13,6 +13,9 @@ configs/*.local.yaml
 ESTADO_ACTUAL.md
 RESUMEN_REVISION.md
 reanudar.md
+# utillaje de publicacion: arbitro de paridad numerica ES/EN y
+# deposito en zenodo por api. proceso, no obra.
+/notas_publicacion/
 
 # artefactos pesados / generados: el csv crudo del barrido se
 # queda fuera (7,6 MB); las tablas de lectura en frío y las figuras
